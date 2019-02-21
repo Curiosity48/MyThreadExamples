@@ -1,6 +1,7 @@
 package nbdadi;
 
 import java.util.Scanner;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,8 +32,9 @@ public class NBDadi {
      */
     public static void main(String[] args) {
         try {
+            Semaphore sem = new Semaphore(-3);
             java.io.BufferedReader console = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
-            CDatiCondivisi dati = new CDatiCondivisi();
+            CDatiCondivisi dati = new CDatiCondivisi(sem);
             boolean sleep, yield;
             sleep = true;
             yield = false;
@@ -55,10 +57,8 @@ public class NBDadi {
             th2.termina();
             th3.termina();
             thVis.termina();
-            th1.join();
-            th2.join();
-            th3.join();
-            thVis.join();
+            
+            dati.aquire();
             
             dati.VisualizzaSchermo();
             

@@ -95,6 +95,7 @@ public class ThDadi extends Thread {
                     Thread.yield();
                 }
             }
+            PtrDati.release();
         } catch (InterruptedException ex) {
 
         }

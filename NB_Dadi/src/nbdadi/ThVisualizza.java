@@ -79,7 +79,7 @@ public class ThVisualizza extends Thread {
                 Thread.sleep(100);
             }
             clearConsole();
-
+            PtrDati.release();    
         } catch (InterruptedException ex) {
             Logger.getLogger(ThVisualizza.class.getName()).log(Level.SEVERE, null, ex);
         }

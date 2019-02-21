@@ -5,6 +5,8 @@
  */
 package nbdadi;
 
+import java.util.concurrent.Semaphore;
+
 /**
  * @author Tosetti Luca
  *
@@ -12,6 +14,8 @@ package nbdadi;
  * dati condivisi
  */
 public class CDatiCondivisi {
+    
+    Semaphore  sem;
     /**
      * Attributo che conterrà le varie linee di testo che dovranno poi comparire su schermo
      */
@@ -45,7 +49,7 @@ public class CDatiCondivisi {
      * @param terzoDado valore che si vuole far assumere al terzoDado
      *
      */
-    public CDatiCondivisi(int primoDado, int secondoDado, int terzoDado) {
+    public CDatiCondivisi(int primoDado, int secondoDado, int terzoDado ,Semaphore sem) {
         schermo = new String[10000];
         for (int i = 0; i < 10000; i++) {
             schermo[i] = "";
@@ -54,6 +58,7 @@ public class CDatiCondivisi {
         this.secondoDado = secondoDado;
         this.terzoDado = terzoDado;
         this.Elementi = 0;
+        this.sem = sem;
     }
 
     /**
@@ -64,7 +69,7 @@ public class CDatiCondivisi {
      * vengono inizializzate a "".
      *
      */
-    public CDatiCondivisi() {
+    public CDatiCondivisi(Semaphore sem) {
         this.primoDado = 0;
         this.secondoDado = 0;
         this.terzoDado = 0;
@@ -73,6 +78,7 @@ public class CDatiCondivisi {
             schermo[i] = "";
         }
         this.Elementi = 0;
+        this.sem = sem;
     }
     /**
      * @brief Metodo get dell'attributo Elementi
@@ -208,5 +214,17 @@ public class CDatiCondivisi {
         schermo[Elementi] = str;
         Elementi++;
     }
+    
+    
+    public void aquire() throws InterruptedException
+    {
+        sem.acquire();
+    }
+    
+    public void release()
+    {
+        sem.release();  
+    }
+    
 
 }
