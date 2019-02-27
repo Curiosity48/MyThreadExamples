@@ -1,0 +1,55 @@
+@startuml
+
+
+Utente --> Main: start
+
+Main --> sem**: new
+Main --> datiCondivisi**: new
+
+Main --> visTh**: new
+
+Main --> d1Th**: new
+Main --> d2Th**: new
+Main --> d3Th**: new
+
+
+Main --> d1Th++: start()
+d1Th --> d1Th: run()
+Main --> d2Th++: start()
+d2Th --> d2Th: run()
+Main --> d3Th++: start()
+d3Th --> d3Th: run()
+Main --> visTh++: start()
+visTh --> visTh: run()
+
+loop !finito
+d1Th --> datiCondivisi: aggiungiStringa("Hai lanciato il " + numeroDado + "° dado: E' uscito " + num);
+d1Th --> datiCondivisi: setPrimoDado(num)
+d1Th --> datiCondivisi: release();
+end 
+
+loop !finito
+d2Th --> datiCondivisi: aggiungiStringa("Hai lanciato il " + numeroDado + "° dado: E' uscito " + num);
+d2Th --> datiCondivisi: setSecondoDado(num)
+d2Th --> datiCondivisi: release();
+end 
+
+loop !finito
+d3Th --> datiCondivisi: aggiungiStringa("Hai lanciato il " + numeroDado + "° dado: E' uscito " + num);
+d3Th --> datiCondivisi: setTerzoDado(num)
+d3Th --> datiCondivisi: release();
+end 
+
+Main --> d1Th--: termina()
+Main --> d2Th--: termina()
+Main --> d3Th--: termina()
+Main --> visTh--: termina()
+
+
+
+Main --> datiCondivisi: aquire()
+Main --> datiCondivisi: visualizzaSchermo()
+
+
+
+@enduml
